@@ -1,0 +1,11 @@
+{
+  "expo": {
+    "name": "Pure-Care-BD",
+    "slug": "Pure-Care-BD",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  },
+  "name": "Pure-Care-BD"
+}
