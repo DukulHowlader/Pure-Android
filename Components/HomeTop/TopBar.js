@@ -11,14 +11,20 @@ const TopBar = () => {
     return (
         <View style={TopBarStyle.TopMenuView}>
             <Text style={TopBarStyle.CompanyName}>PURE CARE BD</Text>
-            <TextInput placeholder={'    Search for Products...'} style={TopBarStyle.SearchBar}>
-            </TextInput>
-            <View>
-                <Button
-                 style={{borderWidth:1,borderColor:'#71ba58', marginVertical:10}} onPress={() => {alert('cart button clicked!!')}}
-                ><Text style={{color:'#71ba58'}}>Cart item (0)</Text></Button>
+            <View style={{flexDirection:"row"}}>
+                <View style={{flex:1.8}}>
+                    <TextInput placeholder={'    Search for Products...'} style={TopBarStyle.SearchBar}>
+                    </TextInput>
+                </View>
+                <View style={{flex:1}}>
+                    <Button
+                        style={{ borderWidth: 1,justifyContent: 'flex-end', borderColor: '#71ba58', marginVertical: 8,marginHorizontal:10, }} onPress={() => { alert('cart button clicked!!') }}
+                    ><Text style={{ color: '#71ba58' }}>Cart(0)</Text></Button>
+                </View>
             </View>
         </View>
+
+
 
     );
 };

@@ -1,13 +1,15 @@
 import React from 'react'
-import { StyleSheet, Text, View ,Button} from 'react-native'
+import { StyleSheet, Text, View, Button, ScrollView } from 'react-native'
+import CategoryList from '../Components/HomeTop/CategoryList'
 import TopBar from '../Components/HomeTop/TopBar'
 
-export default function ContactScreen({navigation}) {
+export default function ContactScreen({ navigation }) {
     return (
-        <View>
-            <TopBar/>
+        <ScrollView style={{ marginHorizontal: 20, }}>
+            <TopBar />
+            <CategoryList />
             <Text>Contact</Text>
-        </View>
+        </ScrollView>
     )
 }
 

@@ -16,14 +16,15 @@ const TopBarStyle = StyleSheet.create({
     },
 
     SearchBar:{
-        width:'70%',
         height:40,
         borderStyle:'solid',
         borderWidth:1,
         borderColor:'green',
         borderRadius:5,
         backgroundColor:'#fff',
-        marginBottom:10
+        justifyContent: 'flex-start',
+        marginVertical: 7,
+        marginHorizontal:5,
     },
     // topContainer:{
     //     flex:1
