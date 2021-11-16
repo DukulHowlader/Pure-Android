@@ -44,12 +44,7 @@ export default function DrawerContent(props) {
                                 </Caption>
                             </View>
                         </View>
-                        <View style={styles.row}>
-                            <View style={styles.section}>
-                                <Paragraph style={[styles.paragraph, styles.caption]}>80</Paragraph>
-                                <Caption style={styles.caption}>Total order</Caption>
-                            </View>
-                        </View>
+                       
                     </View>
                     <Drawer.Section style={styles.drawerSection}>
                         <DrawerItem

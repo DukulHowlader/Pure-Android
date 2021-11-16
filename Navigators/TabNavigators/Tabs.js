@@ -3,9 +3,9 @@ import { Text, View, Image } from 'react-native'
 import HomeStackScreen from "../StackNavigator/HomeStackScreen";
 import AboutStackScreen from "../StackNavigator/AboutStackScreen";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import LoginScreen from "../../Screens/LoginScreen";
 import tabStyle from './tabStyle';
 import ContactStackScreen from "../StackNavigator/ContactStackScreen";
+import RootStackScreen from "../StackNavigator/RootStackScreen";
 
 
 const Tab = createBottomTabNavigator();
@@ -18,22 +18,13 @@ const Tabs = () => {
             screenOptions={{
                 tabBarShowLabel: false,
                 headerShown: false,
-                tabBarStyle: {
-                    position: 'absolute',
-                    bottom: 25,
-                    left: 20,
-                    right: 20,
-                    elevation: 0,
-                    backgroundColor: '#ffffff',
-                    borderRadius: 15,
-                    height: 90,
-                    ...tabStyle.shadow
+                tabBarStyle:{
+                    bottom:5
                 }
-
             }}>
             <Tab.Screen name="HomeStack" component={HomeStackScreen} options={{
                 tabBarIcon: ({ focused }) => (
-                    <View style={{ alignItems: 'center', justifyContent: 'center', top: 10 }}>
+                    <View style={{ alignItems: 'center', justifyContent: 'center', top:2 }}>
                         <Image
                             source={require('../../icons/home.png')}
                             resizeMode='contain'
@@ -52,7 +43,7 @@ const Tabs = () => {
             <Tab.Screen name="AboutStack" component={AboutStackScreen}
                 options={{
                     tabBarIcon: ({ focused }) => (
-                        <View style={{ alignItems: 'center', justifyContent: 'center', top: 10 }}>
+                        <View style={{ alignItems: 'center', justifyContent: 'center', top:2, }}>
                             <Image
                                 source={require('../../icons/about-us.png')}
                                 resizeMode='contain'
@@ -72,7 +63,7 @@ const Tabs = () => {
             <Tab.Screen name="ContactStack" component={ContactStackScreen}
                 options={{
                     tabBarIcon: ({ focused }) => (
-                        <View style={{ alignItems: 'center', justifyContent: 'center', top: 10 }}>
+                        <View style={{ alignItems: 'center', justifyContent: 'center', top:2}}>
                             <Image
                                 source={require('../../icons/contact.png')}
                                 resizeMode='contain'
@@ -89,10 +80,10 @@ const Tabs = () => {
                     ),
                 }}
             />
-            <Tab.Screen name="Login" component={LoginScreen}
+            <Tab.Screen name="Login" component={RootStackScreen}
                 options={{
                     tabBarIcon: ({ focused }) => (
-                        <View style={{ alignItems: 'center', justifyContent: 'center', top: 10 }}>
+                        <View style={{ alignItems: 'center', justifyContent: 'center', top:2}}>
                             <Image
                                 source={require('../../icons/login.png')}
                                 resizeMode='contain'

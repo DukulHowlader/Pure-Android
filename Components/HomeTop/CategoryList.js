@@ -82,10 +82,12 @@ const CategoryList = () => {
     }
 
     return (
-        <SafeAreaView>
+        <SafeAreaView contentContainerStyle={{
+            flexGrow: 1
+         }}>
             <Icon.Button name="ios-menu" size={25} backgroundColor='#71ba58' onPress={() => setShow(!show)}></Icon.Button>
             {show &&
-                <ScrollView>
+                <ScrollView showsVerticalScrollIndicator={false}>
                     {
                         categories?.map((item, key) => (
                             <ExpandableComponent
