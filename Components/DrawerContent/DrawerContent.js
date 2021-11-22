@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import {
+    useTheme,
     Avatar,
     Title,
     Caption,
@@ -16,12 +17,21 @@ import {
     DrawerItem
 } from '@react-navigation/drawer';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { AuthContext } from '../AuthContext/AuthContext';
 
 export default function DrawerContent(props) {
-    const [isDarkTheme, setIsDarkTheme] = useState(false);
+    const {toggleTheme} = useContext(AuthContext);
+    const paperTheme = useTheme();
 
-    const toggleTheme = () => {
-        setIsDarkTheme(!isDarkTheme)
+    const logOutHandle = async() => {
+        try {
+            await AsyncStorage.removeItem('LOGGEDIN');
+            props.navigation.navigate('HomeStack')
+        }
+        catch(exception) {
+            console.log(exception)
+        }
     }
     return (
         <View style={{ flex: 1 }}>
@@ -37,10 +47,10 @@ export default function DrawerContent(props) {
 
                             <View style={{ marginLeft: 15, flexDirection: 'column' }}>
                                 <Title>
-                                    PURE CARE BD
+                                    Dukul Howlader
                                 </Title>
                                 <Caption>
-                                    @purecarebd
+                                    @dukulh
                                 </Caption>
                             </View>
                         </View>
@@ -61,13 +71,24 @@ export default function DrawerContent(props) {
                         <DrawerItem
                             icon={({ color, size }) => (
                                 <Icon
+                                    name="layers-search-outline"
+                                    color={color}
+                                    size={size}
+                                />
+                            )}
+                            label="Category"
+                            onPress={() => {props.navigation.navigate('CategoryScreen') }}
+                        />
+                        <DrawerItem
+                            icon={({ color, size }) => (
+                                <Icon
                                     name="account-outline"
                                     color={color}
                                     size={size}
                                 />
                             )}
                             label="Profile"
-                            onPress={() => { }}
+                            onPress={() => {props.navigation.navigate('ProfileScreen') }}
                         />
                         <DrawerItem
                             icon={({ color, size }) => (
@@ -110,7 +131,7 @@ export default function DrawerContent(props) {
                             <View style={styles.preference}>
                                 <Text>Dark Theme</Text>
                                 <View pointerEvents="none">
-                                    <Switch value={isDarkTheme}/>
+                                    <Switch value={paperTheme.dark}/>
                                 </View>
                             </View>
                         </TouchableRipple>
@@ -127,7 +148,7 @@ export default function DrawerContent(props) {
                         />
                     )}
                     label="Sign Out"
-                    onPress={() => { }}
+                    onPress={logOutHandle}
                 />
             </Drawer.Section>
         </View>

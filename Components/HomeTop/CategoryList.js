@@ -23,7 +23,7 @@ const ExpandableComponent = ({ item, onClickFunction }) => {
             >
                 <Text style={TopBarStyle.itemText}>
                     {item.category}
-                </Text>
+                </Text> 
             </TouchableOpacity>
             <View style={{ height: layoutHeight, overflow: 'hidden' }}>
                 {

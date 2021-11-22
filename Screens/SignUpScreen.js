@@ -5,6 +5,7 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Feather from 'react-native-vector-icons/Feather';
 import { LinearGradient } from 'expo-linear-gradient';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { useTheme } from 'react-native-paper';
 
 const SignUpScreen = ({ navigation }) => {
     const [data, setData] = useState({
@@ -17,6 +18,9 @@ const SignUpScreen = ({ navigation }) => {
         secureTextEntry: true,
         secureConfirmTextEntry: true,
     });
+    const {colors} = useTheme();
+
+    
 
     const textInputCheck = (value) => {
         if (value.length != 0) {
@@ -89,15 +93,16 @@ const SignUpScreen = ({ navigation }) => {
                         Register Now!
                     </Text>
                 </View>
-                <Animatable.View style={styles.footer} animation="fadeInUpBig">
-                    <Text style={styles.text_footer}>Full Name</Text>
+                <Animatable.View style={[styles.footer,{backgroundColor:colors.background}]} animation="fadeInUpBig">
+                    <Text style={[styles.text_footer,{color:colors.text}]}>Full Name</Text>
                     <View style={styles.action}>
                         <FontAwesome name="user-o"
-                            color="#05375a"
+                            color={colors.text}
                             size={20} />
                         <TextInput
                             placeholder="Your Full Name"
-                            style={styles.textInput}
+                            style={[styles.textInput, {color:colors.text}]}
+                            placeholderTextColor="#666666"
                             autoCapitalize="none"
                             onChangeText={(value) => textInputCheck(value)}
                         />
@@ -105,7 +110,7 @@ const SignUpScreen = ({ navigation }) => {
                             <Animatable.View animation="bounceIn">
                                 <Feather
                                     name="check-circle"
-                                    color='#71ba58'
+                                    color={colors.text}
                                     size={20}
                                 />
                             </Animatable.View>
@@ -113,14 +118,15 @@ const SignUpScreen = ({ navigation }) => {
                             null
                         }
                     </View>
-                    <Text style={[styles.text_footer], { marginTop: 20 }}>Email</Text>
+                    <Text style={[styles.text_footer], { marginTop: 20,color:colors.text }}>Email</Text>
                     <View style={styles.action}>
                         <FontAwesome name="envelope-o"
-                            color="#05375a"
+                            color={colors.text}
                             size={20} />
                         <TextInput
                             placeholder="Your Email"
-                            style={styles.textInput}
+                            style={[styles.textInput, {color:colors.text}]}
+                            placeholderTextColor="#666666"
                             autoCapitalize="none"
                             onChangeText={(value) => emailCheck(value)}
                         />
@@ -128,7 +134,7 @@ const SignUpScreen = ({ navigation }) => {
                             <Animatable.View animation="bounceIn">
                                 <Feather
                                     name="check-circle"
-                                    color='#71ba58'
+                                    color={colors.text}
                                     size={20}
                                 />
                             </Animatable.View>
@@ -137,15 +143,16 @@ const SignUpScreen = ({ navigation }) => {
                         }
                     </View>
 
-                    <Text style={[styles.text_footer, { marginTop: 20 }]}>Password</Text>
+                    <Text style={[styles.text_footer, { marginTop: 20, color:colors.text }]}>Password</Text>
                     <View style={styles.action}>
                         <Feather name="lock"
-                            color="#05375a"
+                            color={colors.text}
                             size={20}
                         />
                         <TextInput
                             placeholder="Your Password"
-                            style={styles.textInput}
+                            style={[styles.textInput, {color:colors.text}]}
+                            placeholderTextColor="#666666"
                             autoCapitalize="none"
                             secureTextEntry={data.secureTextEntry ? true : false}
                             onChangeText={(value) => handlePassView(value)}
@@ -167,15 +174,16 @@ const SignUpScreen = ({ navigation }) => {
                         </TouchableOpacity>
                     </View>
 
-                    <Text style={[styles.text_footer, { marginTop: 20 }]}>Confirm Password</Text>
+                    <Text style={[styles.text_footer, { marginTop: 20, color:colors.text }]}>Confirm Password</Text>
                     <View style={styles.action}>
                         <Feather name="lock"
-                            color="#05375a"
+                            color={colors.text}
                             size={20}
                         />
                         <TextInput
                             placeholder="Confirm Your Password"
-                            style={styles.textInput}
+                            style={[styles.textInput, {color:colors.text}]}
+                            placeholderTextColor="#666666"
                             autoCapitalize="none"
                             secureTextEntry={data.secureConfirmTextEntry ? true : false}
                             onChangeText={(value) => handleConPassView(value)}

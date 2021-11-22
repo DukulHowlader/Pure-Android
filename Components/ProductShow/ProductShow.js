@@ -4,9 +4,12 @@ import { useState } from 'react';
 import {
     Text,
     View,
-    SafeAreaView
+    SafeAreaView,
+    Image,
+    TouchableOpacity
 } from 'react-native';
-
+import { Button } from 'react-native-paper';
+import Feather from 'react-native-vector-icons/Feather';
 import Carousel from 'react-native-snap-carousel';
 
 const ProductShow = () => {
@@ -39,27 +42,96 @@ const ProductShow = () => {
 
     const renderItem = ({ item, index }) => {
         return (
+
             <View style={{
                 backgroundColor: 'floralwhite',
-                borderRadius: 5,
-                height: 250,
-                padding: 50,
-                marginLeft: 25,
-                marginRight: 25,
+                borderRadius: 20,
+                height: 320,
+                marginLeft: 18,
+                marginRight: 18,
+
             }}>
-                
-                <Text style={{ fontSize: 20 }}>{item.ProductName}</Text>
-                <Text>{item.text}</Text>
+                <Image
+                    source={{
+                        uri: `${item.ProductImage}`
+                    }}
+                    style={{ width: '100%', height: 180, borderTopLeftRadius: 20, borderTopRightRadius: 20 }}
+                />
+                <TouchableOpacity>
+                    <View style={{ alignItems: 'center' }}>
+                        <Text style={{ fontSize: 18, marginVertical: 15, color: '#12013E' }}>{item.ProductName}</Text>
+                        <Text style={{ fontSize: 16, fontWeight: 'bold', color: "#71ba58" }}>{item.ProductPrice}/-</Text>
+                    </View>
+                </TouchableOpacity>
+                <Button style={{ alignItems: 'flex-end', marginTop: 15 }}>
+                    <Text>View Details </Text>
+                    <Text><Feather 
+                    name='arrow-right'
+                    size={20}
+                    /></Text>
+                </Button>
             </View>
+
 
         )
     }
     return (
         <SafeAreaView style={{ flex: 1, paddingTop: 50, }}>
+
+            <Text style={{
+                fontSize: 22, marginTop: 20,
+                color: '#71ba58',
+                marginBottom:15,
+                borderBottomWidth:2,
+                borderBottomColor:'#F67306'
+            }}
+
+            >Beauty Products</Text>
+
             <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', }}>
                 <Carousel
                     layout={"default"}
                     data={firstProductsDetails}
+                    sliderWidth={300}
+                    itemWidth={300}
+                    renderItem={(item, index) => renderItem(item, index)}
+                />
+            </View>
+
+            <Text style={{
+                fontSize: 22, marginTop: 40,
+                color: '#71ba58',
+                marginBottom:15,
+                borderBottomWidth:2,
+                borderBottomColor:'#F67306'
+            }}
+
+            >Butter & Other Products</Text>
+
+            <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', }} >
+                <Carousel
+                    layout={"default"}
+                    data={secondProductsDetails}
+                    sliderWidth={300}
+                    itemWidth={300}
+                    renderItem={(item, index) => renderItem(item, index)}
+                />
+            </View>
+
+            <Text style={{
+                fontSize: 22, marginTop: 40,
+                color: '#71ba58',
+                marginBottom:15,
+                borderBottomWidth:2,
+                borderBottomColor:'#F67306'
+            }}
+
+            >Oils</Text>
+
+            <View style={{ flex: 1, marginBottom:30, flexDirection: 'row', justifyContent: 'center', }} >
+                <Carousel
+                    layout={"default"}
+                    data={thirdProductsDetails}
                     sliderWidth={300}
                     itemWidth={300}
                     renderItem={(item, index) => renderItem(item, index)}

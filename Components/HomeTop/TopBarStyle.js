@@ -5,7 +5,6 @@ const TopBarStyle = StyleSheet.create({
         alignItems:'center',
     },
     CompanyName :{
-        fontFamily: 'sans-serif',
         marginTop:20,
         marginBottom: 20,
         textAlign:"center",
