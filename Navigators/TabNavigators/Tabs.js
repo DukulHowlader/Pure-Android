@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Text, View, Image } from 'react-native'
 import HomeStackScreen from "../StackNavigator/HomeStackScreen";
 import AboutStackScreen from "../StackNavigator/AboutStackScreen";
@@ -8,13 +8,13 @@ import ContactStackScreen from "../StackNavigator/ContactStackScreen";
 import RootStackScreen from "../StackNavigator/RootStackScreen";
 import { userContext } from "../../App";
 import ProfileStackScreen from "../StackNavigator/ProfileStackScreen";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 
 const Tab = createBottomTabNavigator();
 
-
 const Tabs = () => {
-    const [loggedInUser, setLoggedInUser] = useContext(userContext);
+    const [loggedInUser, setLoggedInUser] = useContext(userContext)
     return (
         <>
             <Tab.Navigator
@@ -85,7 +85,7 @@ const Tabs = () => {
                     }}
                 />
                 {loggedInUser?._id ?
-                    <Tab.Screen name="Profile" component={ProfileStackScreen}
+                    <Tab.Screen name="ProfileStack" component={ProfileStackScreen}
                         options={{
                             tabBarIcon: ({ focused }) => (
                                 <View style={{ alignItems: 'center', justifyContent: 'center', top: 2 }}>
@@ -106,7 +106,7 @@ const Tabs = () => {
                         }}
                     />
                     :
-                    <Tab.Screen name="Login" component={RootStackScreen}
+                    <Tab.Screen name="RootStack" component={RootStackScreen}
                         options={{
                             tabBarIcon: ({ focused }) => (
                                 <View style={{ alignItems: 'center', justifyContent: 'center', top: 2 }}>

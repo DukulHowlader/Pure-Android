@@ -1,12 +1,13 @@
-import React from 'react';
-import { SafeAreaView, StatusBar, StyleSheet, View } from 'react-native';
+import React, { useContext } from 'react';
+import { SafeAreaView, StatusBar, StyleSheet, View, Share } from 'react-native';
 import { Avatar, Title, Caption, TouchableRipple, Text } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Icons from 'react-native-vector-icons/MaterialCommunityIcons'
 import { useTheme } from '@react-navigation/native';
-
+import { userContext } from '../App';
 export default function ProfileScreen() {
-    const theme = useTheme()
+    const [loggedInUser, setLoggedInUser] = useContext(userContext);
+    const theme = useTheme();
     return (
         <SafeAreaView style={styles.container}>
             <StatusBar barStyle ={theme.dark ? 'light-content' : 'dark-content'}/>
@@ -19,8 +20,7 @@ export default function ProfileScreen() {
                         size={80}
                     />
                     <View style={{ marginLeft: 20 }}>
-                        <Title style={[styles.title, { marginTop: 15, marginBottom: 5 }]}>Dukul Howlader</Title>
-                        <Caption style={styles.caption}>@dukulH</Caption>
+                        <Title style={[styles.title, { marginTop: 20}]}>{loggedInUser?.CustomerName}</Title>
                     </View>
                 </View>
             </View>
@@ -32,7 +32,7 @@ export default function ProfileScreen() {
                         size={20}
                     />
                     <Text style={{ color: "#777777", marginLeft: 20 }}>
-                        120 west kafrul, Dahka-1207
+                        {loggedInUser?.CustomerAddress}
                     </Text>
                 </View>
                 <View style={styles.row}>
@@ -42,7 +42,7 @@ export default function ProfileScreen() {
                         size={20}
                     />
                     <Text style={{ color: "#777777", marginLeft: 20 }}>
-                        +880-1846069269
+                        {loggedInUser?.CustomerContact}
                     </Text>
                 </View>
                 <View style={styles.row}>
@@ -52,7 +52,7 @@ export default function ProfileScreen() {
                         size={20}
                     />
                     <Text style={{ color: "#777777", marginLeft: 20 }}>
-                        dukul.howlader30@gmail.com
+                        {loggedInUser?.CustomerEmail}
                     </Text>
                 </View>
             </View>

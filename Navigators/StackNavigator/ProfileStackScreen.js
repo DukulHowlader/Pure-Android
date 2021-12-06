@@ -6,40 +6,39 @@ import ProfileScreen from '../../Screens/ProfileScreen';
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons"
 import EditProfileScreen from '../../Screens/EditProfileScreen';
 import { useTheme } from '@react-navigation/native';
+import ProductDetailsScreen from '../../Screens/ProductDetailsScreen';
 
 const ProfileStack = createNativeStackNavigator();
 
 export default function ProfileStackScreen({ navigation }) {
-    const {colors} = useTheme();
+    const { colors } = useTheme();
     return (
         <ProfileStack.Navigator screenOptions={{
             headerStyle: {
-                backgroundColor:colors.background,
+                backgroundColor: colors.background,
                 fontWeight: 'bold',
             },
-            headerShadowVisible:false,
-            headerTintColor: '#000',
+            headerShadowVisible: false,
+            headerTintColor: colors.text,
         }}>
-            <ProfileStack.Screen name="Profile" component={ProfileScreen}
+            <ProfileStack.Screen name="ProfileScreen" component={ProfileScreen}
                 options={{
                     title: "",
                     headerLeft: () => (
                         <Icon.Button name="ios-menu" size={25} backgroundColor={colors.background} color={colors.text} onPress={() => navigation.openDrawer()}></Icon.Button>
                     ),
                     headerRight: () => (
-                        <MaterialCommunityIcons.Button name="account-edit" size={25} backgroundColor={colors.background} color={colors.text} onPress={() => navigation.navigate("EditProfile")}></MaterialCommunityIcons.Button>
+                        <MaterialCommunityIcons.Button name="account-edit" size={25} backgroundColor={colors.background} color={colors.text} onPress={() => navigation.navigate("EditProfileScreen")}></MaterialCommunityIcons.Button>
                     ),
 
                 }} />
 
-            <ProfileStack.Screen name="EditProfile" component={EditProfileScreen}
+            <ProfileStack.Screen name="EditProfileScreen" component={EditProfileScreen}
                 options={{
                     title: "Edit Profile",
-                    headerTitleStyle:{
-                       color:colors.text, 
+                    headerTitleStyle: {
+                        color: colors.text,
                     }
-                    
-
                 }} />
         </ProfileStack.Navigator>
     )

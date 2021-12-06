@@ -19,17 +19,20 @@ import {
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { AuthContext } from '../AuthContext/AuthContext';
+import { userContext } from '../../App';
 
 export default function DrawerContent(props) {
-    const {toggleTheme} = useContext(AuthContext);
+    const { toggleTheme } = useContext(AuthContext);
+    const [loggedInUser, setLoggedInUser] = useContext(userContext);
     const paperTheme = useTheme();
 
-    const logOutHandle = async() => {
+    const logOutHandle = async () => {
         try {
-            await AsyncStorage.removeItem('LOGGEDIN');
+            await AsyncStorage.removeItem('key');
+            setLoggedInUser(null);
             props.navigation.navigate('HomeStack')
         }
-        catch(exception) {
+        catch (exception) {
             console.log(exception)
         }
     }
@@ -47,14 +50,14 @@ export default function DrawerContent(props) {
 
                             <View style={{ marginLeft: 15, flexDirection: 'column' }}>
                                 <Title>
-                                    Dukul Howlader
+                                    {loggedInUser ? loggedInUser.CustomerName : 'Not logged in!!!'}
                                 </Title>
                                 <Caption>
-                                    @dukulh
+                                    {loggedInUser ? loggedInUser.CustomerEmail : 'null'}
                                 </Caption>
                             </View>
                         </View>
-                       
+
                     </View>
                     <Drawer.Section style={styles.drawerSection}>
                         <DrawerItem
@@ -66,30 +69,21 @@ export default function DrawerContent(props) {
                                 />
                             )}
                             label="Home"
-                            onPress={() => {props.navigation.navigate('HomeStack')}}
+                            onPress={() => { props.navigation.navigate('HomeStack') }}
                         />
-                        <DrawerItem
-                            icon={({ color, size }) => (
-                                <Icon
-                                    name="layers-search-outline"
-                                    color={color}
-                                    size={size}
-                                />
-                            )}
-                            label="Category"
-                            onPress={() => {props.navigation.navigate('CategoryScreen') }}
-                        />
-                        <DrawerItem
-                            icon={({ color, size }) => (
-                                <Icon
-                                    name="account-outline"
-                                    color={color}
-                                    size={size}
-                                />
-                            )}
-                            label="Profile"
-                            onPress={() => {props.navigation.navigate('ProfileScreen') }}
-                        />
+                        {
+                            loggedInUser ? <DrawerItem
+                                icon={({ color, size }) => (
+                                    <Icon
+                                        name="account-outline"
+                                        color={color}
+                                        size={size}
+                                    />
+                                )}
+                                label="Profile"
+                                onPress={() => { props.navigation.navigate('ProfileStackScreen') }}
+                            /> : null
+                        }
                         <DrawerItem
                             icon={({ color, size }) => (
                                 <Icon
@@ -99,7 +93,7 @@ export default function DrawerContent(props) {
                                 />
                             )}
                             label="Cart Item (s)"
-                            onPress={() => { }}
+                            onPress={() => { props.navigation.navigate('CartViewScreen')}}
                         />
                         <DrawerItem
                             icon={({ color, size }) => (
@@ -110,7 +104,7 @@ export default function DrawerContent(props) {
                                 />
                             )}
                             label="About Us"
-                            onPress={() => {props.navigation.navigate('AboutStack')}}
+                            onPress={() => { props.navigation.navigate('AboutStack') }}
                         />
                         <DrawerItem
                             icon={({ color, size }) => (
@@ -121,17 +115,17 @@ export default function DrawerContent(props) {
                                 />
                             )}
                             label="Contact Us"
-                            onPress={() => {props.navigation.navigate('ContactStack')}}
+                            onPress={() => { props.navigation.navigate('ContactStack') }}
                         />
-                        
-                       
+
+
                     </Drawer.Section>
                     <Drawer.Section title="Preferences">
-                        <TouchableRipple onPress={() => {toggleTheme()}}>
+                        <TouchableRipple onPress={() => { toggleTheme() }}>
                             <View style={styles.preference}>
                                 <Text>Dark Theme</Text>
                                 <View pointerEvents="none">
-                                    <Switch value={paperTheme.dark}/>
+                                    <Switch value={paperTheme.dark} />
                                 </View>
                             </View>
                         </TouchableRipple>

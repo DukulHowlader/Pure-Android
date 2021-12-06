@@ -69,8 +69,8 @@ const SignInScreen = ({ navigation }) => {
                 .then(result => {
                     if (result.loginInfo === 'true') {
                         setLoggedInUser(result);
-                        storeData()
-                        navigation.navigate('Home')
+                        AsyncStorage.setItem('key', JSON.stringify(result))
+                        navigation.navigate('HomeStack')
 
                     }
                     else {
@@ -83,21 +83,6 @@ const SignInScreen = ({ navigation }) => {
         }
 
     }
-
-
-    // const storeData = async () => {
-    //     try {
-    //         await AsyncStorage.setItem('id', loggedInUser._id);
-    //         await AsyncStorage.setItem('name', JSON.stringify(loggedInUser.CustomerName));
-    //         await AsyncStorage.setItem('contact', JSON.stringify(loggedInUser.CustomerContact));
-    //         await AsyncStorage.setItem('email', JSON.stringify(loggedInUser.CustomerEmail));
-    //         await AsyncStorage.setItem('address', JSON.stringify(loggedInUser.CustomerAddress));
-    //         await AsyncStorage.setItem('loginInfo', JSON.stringify(loggedInUser.loginInfo));
-    //     } catch (error) {
-    //         console.log(error)
-    //     }
-    // };
-
 
     return (
         <KeyboardAwareScrollView keyboardShouldPersistTaps={'always'}
