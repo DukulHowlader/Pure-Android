@@ -48,9 +48,9 @@ export default function DrawerContent(props) {
                                 }}
                                 size={50} />
 
-                            <View style={{ marginLeft: 15, flexDirection: 'column' }}>
-                                <Title>
-                                    {loggedInUser ? loggedInUser.CustomerName : 'Not logged in!!!'}
+                            <View style={{ marginLeft: 10, flexDirection: 'column' }}>
+                                <Title style={{fontSize:16}}>
+                                    {loggedInUser ? loggedInUser.CustomerName : 'Not logged in'}
                                 </Title>
                                 <Caption>
                                     {loggedInUser ? loggedInUser.CustomerEmail : 'null'}

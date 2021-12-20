@@ -5,6 +5,7 @@ import { userContext } from '../App';
 import Swiper from 'react-native-swiper';
 import { useTheme } from '@react-navigation/native';
 import ProductShow from '../Components/ProductShow/ProductShow';
+import Footer from '../Components/Footer/Footer';
 
 
 export default function HomeScreen({ navigation }) {
@@ -94,6 +95,7 @@ export default function HomeScreen({ navigation }) {
                 }
             </View>
             <ProductShow navigation = {navigation}/>
+            <Footer/>
         </ScrollView>
     )
 }

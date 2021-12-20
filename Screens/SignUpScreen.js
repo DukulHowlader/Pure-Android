@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Platform, StyleSheet, View, Text, Button, TouchableOpacity, Dimensions, TextInput, StatusBar } from 'react-native';
+import { Platform, StyleSheet, View, Text, Button, TouchableOpacity, Dimensions, TextInput, StatusBar, Alert } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Feather from 'react-native-vector-icons/Feather';
@@ -18,9 +18,49 @@ const SignUpScreen = ({ navigation }) => {
         secureTextEntry: true,
         secureConfirmTextEntry: true,
     });
-    const {colors} = useTheme();
 
-    
+    const handleRegistration = () => {
+        const CustomerData = {
+            CustomerName: data.name,
+            CustomerEmail: data.email,
+            CustomerContact: null,
+            CustomerAddress: null,
+            CustomerPass: data.password,
+            CustomerImage: null,
+
+        }
+        fetch('http://10.10.10.95:5000/addUser', {
+            method: 'POST',
+            headers: {
+                'Content-type': 'application/json'
+            },
+            body: JSON.stringify(CustomerData)
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data === true) {
+                    Alert.alert(
+                        "Registration Successful!",
+                        "",
+                        [
+                            { text: "OK", onPress: () => navigation.navigate('SingInScreen') }
+                        ]
+                    );
+
+                }
+
+                else if (data[0] === 'invalid') {
+                    alert('Invalid Email. Please check your email address')
+                }
+
+                else {
+                    alert('Registration failed!!')
+                }
+            })
+    }
+    const { colors } = useTheme();
+
+
 
     const textInputCheck = (value) => {
         if (value.length != 0) {
@@ -83,8 +123,8 @@ const SignUpScreen = ({ navigation }) => {
     }
     return (
         <KeyboardAwareScrollView keyboardShouldPersistTaps={'always'}
-        contentContainerStyle={{flex: 1}}
-        showsVerticalScrollIndicator={false}>
+            contentContainerStyle={{ flex: 1 }}
+            showsVerticalScrollIndicator={false}>
             <View style={styles.container}>
 
                 <StatusBar backgroundColor="#71ba58" barStyle='light-content' />
@@ -93,15 +133,15 @@ const SignUpScreen = ({ navigation }) => {
                         Register Now!
                     </Text>
                 </View>
-                <Animatable.View style={[styles.footer,{backgroundColor:colors.background}]} animation="fadeInUpBig">
-                    <Text style={[styles.text_footer,{color:colors.text}]}>Full Name</Text>
+                <Animatable.View style={[styles.footer, { backgroundColor: colors.background }]} animation="fadeInUpBig">
+                    <Text style={[styles.text_footer, { color: colors.text }]}>Full Name</Text>
                     <View style={styles.action}>
                         <FontAwesome name="user-o"
                             color={colors.text}
                             size={20} />
                         <TextInput
                             placeholder="Your Full Name"
-                            style={[styles.textInput, {color:colors.text}]}
+                            style={[styles.textInput, { color: colors.text }]}
                             placeholderTextColor="#666666"
                             autoCapitalize="none"
                             onChangeText={(value) => textInputCheck(value)}
@@ -118,14 +158,14 @@ const SignUpScreen = ({ navigation }) => {
                             null
                         }
                     </View>
-                    <Text style={[styles.text_footer], { marginTop: 20,color:colors.text }}>Email</Text>
+                    <Text style={[styles.text_footer], { marginTop: 20, color: colors.text }}>Email</Text>
                     <View style={styles.action}>
                         <FontAwesome name="envelope-o"
                             color={colors.text}
                             size={20} />
                         <TextInput
                             placeholder="Your Email"
-                            style={[styles.textInput, {color:colors.text}]}
+                            style={[styles.textInput, { color: colors.text }]}
                             placeholderTextColor="#666666"
                             autoCapitalize="none"
                             onChangeText={(value) => emailCheck(value)}
@@ -143,7 +183,7 @@ const SignUpScreen = ({ navigation }) => {
                         }
                     </View>
 
-                    <Text style={[styles.text_footer, { marginTop: 20, color:colors.text }]}>Password</Text>
+                    <Text style={[styles.text_footer, { marginTop: 20, color: colors.text }]}>Password</Text>
                     <View style={styles.action}>
                         <Feather name="lock"
                             color={colors.text}
@@ -151,7 +191,7 @@ const SignUpScreen = ({ navigation }) => {
                         />
                         <TextInput
                             placeholder="Your Password"
-                            style={[styles.textInput, {color:colors.text}]}
+                            style={[styles.textInput, { color: colors.text }]}
                             placeholderTextColor="#666666"
                             autoCapitalize="none"
                             secureTextEntry={data.secureTextEntry ? true : false}
@@ -174,7 +214,7 @@ const SignUpScreen = ({ navigation }) => {
                         </TouchableOpacity>
                     </View>
 
-                    <Text style={[styles.text_footer, { marginTop: 20, color:colors.text }]}>Confirm Password</Text>
+                    <Text style={[styles.text_footer, { marginTop: 20, color: colors.text }]}>Confirm Password</Text>
                     <View style={styles.action}>
                         <Feather name="lock"
                             color={colors.text}
@@ -182,7 +222,7 @@ const SignUpScreen = ({ navigation }) => {
                         />
                         <TextInput
                             placeholder="Confirm Your Password"
-                            style={[styles.textInput, {color:colors.text}]}
+                            style={[styles.textInput, { color: colors.text }]}
                             placeholderTextColor="#666666"
                             autoCapitalize="none"
                             secureTextEntry={data.secureConfirmTextEntry ? true : false}
@@ -205,12 +245,18 @@ const SignUpScreen = ({ navigation }) => {
                         </TouchableOpacity>
                     </View>
                     <View style={styles.button}>
+
+
                         <LinearGradient
                             colors={['#AECA80', '#71ba58']}
                             style={styles.signIn}
                         >
-                            <Text style={[styles.textSign, { color: "#fff" }]}>Sign Up</Text>
+                            <TouchableOpacity onPress={() => handleRegistration()}>
+                                <Text style={[styles.textSign, { color: "#fff" }]}>Sign Up</Text>
+                            </TouchableOpacity>
                         </LinearGradient>
+
+
                         <TouchableOpacity onPress={() => navigation.goBack()}
                             style={[styles.signIn, {
                                 borderColor: '#71ba58',
@@ -224,8 +270,8 @@ const SignUpScreen = ({ navigation }) => {
                         </TouchableOpacity>
                     </View>
                 </Animatable.View>
-            </View>
-        </KeyboardAwareScrollView>
+            </View >
+        </KeyboardAwareScrollView >
     );
 };
 

@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { View, Text, StyleSheet, StatusBar, ScrollView, TouchableOpacity, Image } from 'react-native'
 import { Button, TextInput, useTheme } from 'react-native-paper';
 import Feather from 'react-native-vector-icons/Feather';
+import Footer from '../Components/Footer/Footer';
 
 const CartViewScreen = () => {
     const { colors } = useTheme();
@@ -120,7 +121,7 @@ const CartViewScreen = () => {
                     <Text style={{ color: colors.text, fontSize: 16, fontWeight: 'bold', marginTop: 10 }}>Total:</Text>
                     <Text style={{ color: colors.text, fontSize: 16, fontWeight: 'bold', marginTop: 10 }}>{totalPrice + 60}/-</Text>
                 </View>
-                <View style={{ flexDirection: 'row', justifyContent: 'flex-end', marginRight: 5, marginVertical: 15 }}>
+                <View style={{ flexDirection: 'row', justifyContent: 'flex-end', marginRight: 5, marginTop: 15, marginBottom:50}}>
                     <TouchableOpacity style={{
                         paddingVertical: 10,
                         paddingHorizontal: 16, 
@@ -141,6 +142,7 @@ const CartViewScreen = () => {
                 </View>
                 </>
                 }
+                <Footer/>
             </ScrollView>
 
 

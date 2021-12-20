@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { SafeAreaView, StatusBar, StyleSheet, View, Share } from 'react-native';
+import { SafeAreaView, StatusBar, StyleSheet, View, Share, ScrollView } from 'react-native';
 import { Avatar, Title, Caption, TouchableRipple, Text } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Icons from 'react-native-vector-icons/MaterialCommunityIcons'
@@ -9,6 +9,7 @@ export default function ProfileScreen() {
     const [loggedInUser, setLoggedInUser] = useContext(userContext);
     const theme = useTheme();
     return (
+        <ScrollView>
         <SafeAreaView style={styles.container}>
             <StatusBar barStyle ={theme.dark ? 'light-content' : 'dark-content'}/>
             <View style={styles.userInfoSection}>
@@ -19,7 +20,7 @@ export default function ProfileScreen() {
                         }}
                         size={80}
                     />
-                    <View style={{ marginLeft: 20 }}>
+                    <View style={{ marginLeft: 10 }}>
                         <Title style={[styles.title, { marginTop: 20}]}>{loggedInUser?.CustomerName}</Title>
                     </View>
                 </View>
@@ -104,6 +105,7 @@ export default function ProfileScreen() {
                 </TouchableRipple>
             </View>
         </SafeAreaView>
+        </ScrollView>
     )
 }
 
@@ -116,7 +118,7 @@ const styles = StyleSheet.create({
         marginTop: 25,
     },
     title: {
-        fontSize: 24,
+        fontSize: 20,
         fontWeight: 'bold',
     },
     caption: {

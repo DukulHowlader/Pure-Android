@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Platform, StyleSheet, View, Text, Button, TouchableOpacity, TextInput, StatusBar } from 'react-native';
+import { Platform, StyleSheet, View, Text, Button, TouchableOpacity, TextInput, StatusBar, Alert } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Feather from 'react-native-vector-icons/Feather';
@@ -70,8 +70,6 @@ const SignInScreen = ({ navigation }) => {
                     if (result.loginInfo === 'true') {
                         setLoggedInUser(result);
                         AsyncStorage.setItem('key', JSON.stringify(result))
-                        navigation.navigate('HomeStack')
-
                     }
                     else {
                         alert("Not Registered!")

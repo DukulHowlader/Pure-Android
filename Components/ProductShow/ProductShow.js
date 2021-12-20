@@ -24,6 +24,7 @@ const ProductShow = ({navigation}) => {
     const Third = 'Oils';
     useEffect(() => {
         fetch(`http://192.168.100.167:5000/products/${First}`)
+
             .then(response => response.json())
             .then(data => setFirstProductsDetails(data))
     }, [First])

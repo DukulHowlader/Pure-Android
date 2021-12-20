@@ -4,6 +4,7 @@ import { ImageHeaderScrollView, TriggeringView } from 'react-native-image-header
 import { TextInput, useTheme } from 'react-native-paper';
 import Feather from 'react-native-vector-icons/Feather';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import Footer from '../Components/Footer/Footer';
 const MIN_HEIGHT = Platform.OS === 'ios' ? 90 : 55;
 const MAX_HEIGHT = 350;
 
@@ -122,8 +123,9 @@ const ProductDetailsScreen = ({ route }) => {
                     <Text style={{ fontSize: 18, fontWeight: 'bold' }}>Usage:</Text>
                     <Text style={styles.sectionContent}>{itemData.ProductUsage}</Text>
                 </View>
-
+                <Footer />
             </ImageHeaderScrollView>
+
         </View>
     )
 }
