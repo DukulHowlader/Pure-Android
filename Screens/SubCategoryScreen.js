@@ -9,7 +9,7 @@ const theme = useTheme();
     const [subCategory, setSubCategory] = useState();
     const { id } = route.params;
     useEffect(() => {
-        fetch(`http://172.16.1.6:5000/categories/${id}`)
+        fetch(`http://192.168.100.167:5000/categories/${id}`)
             .then(response => response.json())
             .then((data) => {
                 setSubCategory(data[0]);

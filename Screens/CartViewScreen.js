@@ -106,7 +106,7 @@ const CartViewScreen = () => {
                         )
                     })
                 }
-                {addedProducts.length > 0 && 
+                {addedProducts?.length > 0 && 
                 <>
                 <View style={{ borderTopWidth: 1, flexDirection: 'row', justifyContent: 'space-between', marginTop: 10, borderTopColor: colors.text, width: '95%', alignSelf: 'center' }}>
                     <Text style={{ color: colors.text, fontSize: 16, fontWeight: 'bold', marginTop: 10 }}>Sub Total:</Text>

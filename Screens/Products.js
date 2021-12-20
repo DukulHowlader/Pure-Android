@@ -10,7 +10,7 @@ const Products = ({ route, navigation}) => {
     const [products, setProducts] = useState();
 
     useEffect(() => {
-        fetch(`http://172.16.1.6:5000/category/${subName}`)
+        fetch(`http://192.168.100.167:5000/category/${subName}`)
             .then(response => response.json())
             .then(data => setProducts(data))
     }, [subName])

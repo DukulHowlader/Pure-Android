@@ -18,7 +18,7 @@ export default function HomeScreen({ navigation }) {
     const {colors} = useTheme();
 
     useEffect(() => {
-        fetch('http://172.16.1.6:5000/categories')
+        fetch('http://192.168.100.167:5000/categories')
             .then(response => response.json())
             .then((data) => {
                 setCategories(data);

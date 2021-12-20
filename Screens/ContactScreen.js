@@ -42,7 +42,8 @@ export default function ContactScreen({ navigation }) {
                             size={20}
                             color='#71ba58'
                         />
-                        <TextInput style={{
+                        <TextInput 
+                        style={{
                             fontSize: 18,
                             fontWeight: 'bold',
                             color: colors.text,

@@ -23,19 +23,19 @@ const ProductShow = ({navigation}) => {
     const Second = 'Butter & Others';
     const Third = 'Oils';
     useEffect(() => {
-        fetch(`http://172.16.1.6:5000/products/${First}`)
+        fetch(`http://192.168.100.167:5000/products/${First}`)
             .then(response => response.json())
             .then(data => setFirstProductsDetails(data))
     }, [First])
 
     useEffect(() => {
-        fetch(`http://172.16.1.6:5000/products/${Second}`)
+        fetch(`http://192.168.100.167:5000/products/${Second}`)
             .then(response => response.json())
             .then(data => setSecondProductsDetails(data))
     }, [Second])
 
     useEffect(() => {
-        fetch(`http://172.16.1.6:5000/products/${Third}`)
+        fetch(`http://192.168.100.167:5000/products/${Third}`)
             .then(response => response.json())
             .then(data => setThirdProductsDetails(data))
     }, [Third])
