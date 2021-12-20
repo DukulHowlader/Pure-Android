@@ -11,7 +11,6 @@ const SubCategoryScreen = ({ route, navigation }) => {
     const { id } = route.params;
     useEffect(() => {
         fetch(`http://192.168.100.167:5000/categories/${id}`)
-
             .then(response => response.json())
             .then((data) => {
                 setSubCategory(data[0]);

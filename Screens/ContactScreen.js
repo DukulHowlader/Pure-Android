@@ -52,6 +52,7 @@ export default function ContactScreen({ navigation }) {
                             multiline={true}
                             numberOfLines={3}
                         ></TextInput>
+           <View style={{ width: '100%' }}>
                         <View style={{ flexDirection: 'row', margin: 30, borderBottomWidth: 1, borderBottomColor: colors.text }}>
                             <Feather
                                 name="user"
@@ -100,6 +101,7 @@ export default function ContactScreen({ navigation }) {
                             />
                         </View>
                     </View>
+                </View>
                 </View>
                 <TouchableOpacity style={{
                     padding: 10,
