@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet,Linking,Image, Text, View, Button, ScrollView, TextInput, TouchableOpacity } from 'react-native';
+import { StyleSheet, Linking, Image, Text, View, Button, ScrollView, TextInput, TouchableOpacity } from 'react-native';
 import { useTheme } from 'react-native-paper';
 import Feather from "react-native-vector-icons/Feather";
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
@@ -27,81 +27,56 @@ export default function ContactScreen({ navigation }) {
                     <View style={{ marginTop: 20 }}>
                         <Text style={styles.HeadText}>GET IN TOUCH</Text>
                     </View>
-                    <View style={{ flexDirection: 'row', alignItems: 'center', margin: 15, borderBottomWidth: 1, borderBottomColor: colors.text }}>
-                        <FontAwesome
-                            name="envelope-o"
-                            size={20}
-                            color='#71ba58'
-                        />
-                        <TextInput 
-                        style={{
-                            fontSize: 18,
-                            fontWeight: 'bold',
-                            color: colors.text,
-                            marginLeft: 10,
-                        }} placeholder="Email"
-                        />
-                    </View>
-                    <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom:50, marginHorizontal: 15, borderBottomWidth: 1, borderBottomColor: colors.text }}>
-                        <Feather
-                            name="edit-3"
-                            size={20}
-                            color='#71ba58'
-                        />
-                        <TextInput
-                            multiline={true}
-                            numberOfLines={3}
-                        ></TextInput>
-           <View style={{ width: '100%' }}>
-                        <View style={{ flexDirection: 'row', margin: 30, borderBottomWidth: 1, borderBottomColor: colors.text }}>
-                            <Feather
-                                name="user"
-                                size={20}
-                                color='#71ba58'
-                            />
-                            <TextInput style={{
+                        <View style={{ width: '100%' }}>
+                            <View style={{ flexDirection: 'row', margin: 30, borderBottomWidth: 1, borderBottomColor: colors.text }}>
+                                <Feather
+                                    name="user"
+                                    size={20}
+                                    color='#71ba58'
+                                />
+                                <TextInput style={{
 
-                                fontSize: 18,
-                                fontWeight: 'bold',
-                                color: colors.text,
-                                marginLeft: 10,
-                            }} placeholder="Name"
-                            />
-                        </View>
-                        <View style={{ flexDirection: 'row', alignItems: 'center', margin: 30, borderBottomWidth: 1, borderBottomColor: colors.text }}>
-                            <FontAwesome
-                                name="envelope-o"
-                                size={20}
-                                color='#71ba58'
-                            />
-                            <TextInput style={{
-                                fontSize: 18,
-                                fontWeight: 'bold',
-                                color: colors.text,
-                                marginLeft: 10,
-                            }} placeholder="Email"
-                            />
-                        </View>
-                        <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 80, margin: 30, borderBottomWidth: 1, borderBottomColor: colors.text }}>
-                            <Feather
-                                name="edit-3"
-                                size={20}
-                                color='#71ba58'
-                            />
-                            <TextInput
-                                multiline={true}
-                                numberOfLines={3}
-                                style={{
                                     fontSize: 18,
                                     fontWeight: 'bold',
                                     color: colors.text,
                                     marginLeft: 10,
-                                    flex: 1,
-                                }} placeholder="Details.."
-                            />
+                                }} placeholder="Name"
+                                />
+                            </View>
+                            <View style={{ flexDirection: 'row', alignItems: 'center', margin: 30, borderBottomWidth: 1, borderBottomColor: colors.text }}>
+                                <FontAwesome
+                                    name="envelope-o"
+                                    size={20}
+                                    color='#71ba58'
+                                />
+                                <TextInput style={{
+                                    fontSize: 18,
+                                    fontWeight: 'bold',
+                                    color: colors.text,
+                                    marginLeft: 10,
+                                }} placeholder="Email"
+                                />
+                            </View>
+                            <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 80, margin: 30, borderBottomWidth: 1, borderBottomColor: colors.text }}>
+                                <Feather
+                                    name="edit-3"
+                                    size={20}
+                                    color='#71ba58'
+                                />
+                                <TextInput
+                                    multiline={true}
+                                    numberOfLines={3}
+                                    style={{
+                                        fontSize: 18,
+                                        fontWeight: 'bold',
+                                        color: colors.text,
+                                        marginLeft: 10,
+                                        flex: 1,
+                                    }} placeholder="Details.."
+                                />
+                            </View>
                         </View>
-                    </View>
-                </View>
+                   
                 </View>
                 <TouchableOpacity style={{
                     padding: 10,
@@ -150,9 +125,9 @@ export default function ContactScreen({ navigation }) {
                         </TouchableOpacity>
                     </View>
                 </View>
-                <Footer/>
+                <Footer />
             </ScrollView>
-            
+
         </KeyboardAwareScrollView>
     )
 }

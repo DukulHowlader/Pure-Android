@@ -29,7 +29,7 @@ const SignUpScreen = ({ navigation }) => {
             CustomerImage: null,
 
         }
-        fetch('http://10.10.10.95:5000/addUser', {
+        fetch('https://immense-cliffs-46216.herokuapp.com/addUser', {
             method: 'POST',
             headers: {
                 'Content-type': 'application/json'

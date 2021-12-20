@@ -98,6 +98,17 @@ export default function DrawerContent(props) {
                         <DrawerItem
                             icon={({ color, size }) => (
                                 <Icon
+                                    name="cart-outline"
+                                    color={color}
+                                    size={size}
+                                />
+                            )}
+                            label="Orders"
+                            onPress={() => { props.navigation.navigate('PastOrders')}}
+                        />
+                        <DrawerItem
+                            icon={({ color, size }) => (
+                                <Icon
                                     name="account-group-outline"
                                     color={color}
                                     size={size}

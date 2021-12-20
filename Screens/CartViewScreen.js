@@ -5,7 +5,7 @@ import { Button, TextInput, useTheme } from 'react-native-paper';
 import Feather from 'react-native-vector-icons/Feather';
 import Footer from '../Components/Footer/Footer';
 
-const CartViewScreen = () => {
+const CartViewScreen = ({navigation}) => {
     const { colors } = useTheme();
     const theme = useTheme();
     const [addedProducts, setAddedProducts] = useState([]);
@@ -130,7 +130,7 @@ const CartViewScreen = () => {
                         flexDirection:'row',
                         justifyContent:'space-evenly'
                     }}
-                    onPress={() => alert('Checkout Button Clicked!')}
+                    onPress={() => navigation.navigate('ProceedCheck')}
                     >
                         <Text style={{fontSize:16, color: '#ffffff', fontWeight:'bold' }}>Proceed Checkout</Text>
                         <Feather

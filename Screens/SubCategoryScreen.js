@@ -7,10 +7,10 @@ import Footer from '../Components/Footer/Footer';
 const SubCategoryScreen = ({ route, navigation }) => {
     const { colors } = useTheme();
     const theme = useTheme();
-    const [subCategory, setSubCategory] = useState();
+    const [subCategory, setSubCategory] = useState([]);
     const { id } = route.params;
     useEffect(() => {
-        fetch(`http://192.168.100.167:5000/categories/${id}`)
+        fetch(`https://immense-cliffs-46216.herokuapp.com/categories/${id}`)
             .then(response => response.json())
             .then((data) => {
                 setSubCategory(data[0]);
@@ -20,6 +20,7 @@ const SubCategoryScreen = ({ route, navigation }) => {
             });
 
     }, [id]);
+    console.log(subCategory)
 
     return (
         <SafeAreaView style={[styles.categoryBtn, { flex: 1, marginTop: 10 }]}>

@@ -9,12 +9,14 @@ import Products from '../../Screens/Products';
 import ProductDetailsScreen from '../../Screens/ProductDetailsScreen';
 import CartViewScreen from '../../Screens/CartViewScreen';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import PastOrders from '../../Screens/PastOrders';
+import ProceedCheckout from '../../Screens/ProceedCheckout';
 
 
 const HomeStack = createNativeStackNavigator();
 
 export default function HomeStackScreen({ navigation }) {
-   
+
     const [addedProducts, setAddedProducts] = useState([])
     useEffect(() => {
         const readAddedProductData = async () => {
@@ -22,7 +24,7 @@ export default function HomeStackScreen({ navigation }) {
                 const addedProductData = JSON.parse(await AsyncStorage.getItem('addedProducts'));
                 setAddedProducts(addedProductData);
             } catch (e) {
-                alert( e)
+                alert(e)
             }
         };
         readAddedProductData();
@@ -50,9 +52,9 @@ export default function HomeStackScreen({ navigation }) {
                         <View style={{ flexDirection: 'row', marginStart: 30 }}>
                             <Icon.Button name="ios-search" size={22} color={colors.text} backgroundColor={colors.background} onPress={() => navigation.openDrawer()}></Icon.Button>
                             <Icon.Button name="ios-cart" size={22} color={colors.text}
-                             backgroundColor={colors.background} onPress={() => navigation.navigate('CartViewScreen')}>
-                                 <Text style={{color:colors.text,fontSize:16, fontWeight:'bold'}}>({addedProducts?.length || 0})</Text>
-                             </Icon.Button>
+                                backgroundColor={colors.background} onPress={() => navigation.navigate('CartViewScreen')}>
+                                <Text style={{ color: colors.text, fontSize: 16, fontWeight: 'bold' }}>({addedProducts?.length || 0})</Text>
+                            </Icon.Button>
                         </View>)
                 }}
             />
@@ -71,6 +73,17 @@ export default function HomeStackScreen({ navigation }) {
             <HomeStack.Screen name="CartViewScreen" component={CartViewScreen}
                 options={() => ({
                     title: 'Cart Item(s)'
+                })}
+            />
+
+            <HomeStack.Screen name="PastOrders" component={PastOrders}
+                options={() => ({
+                    title: ''
+                })}
+            />
+            <HomeStack.Screen name="ProceedCheck" component={ProceedCheckout}
+                options={() => ({
+                    title: 'Proceed Checkout'
                 })}
             />
 

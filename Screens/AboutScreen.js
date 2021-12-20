@@ -1,22 +1,28 @@
 import React from 'react'
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import Footer from '../Components/Footer/Footer';
 export default function AboutScreen() {
 
     const values =[
         {
+            id:1,
             Option:'Service to all'
         },
         {
+            id:2,
             Option:'Total integrity'
         },
         {
+            id:3,
             Option:'Absolute commitment to quality'
         },
         {
+            id:4,
             Option:'Respect and devotion to Mother Nature'
         },
         {
+            id:5,
             Option:'No compromise on being who we are'
         },
     ]
@@ -65,7 +71,7 @@ export default function AboutScreen() {
             <View style={[styles.headerTextView,{marginBottom:30}]}>
                 <Text style={[styles.text, { fontWeight: 'bold' }]}>Our Core Values</Text>
                 {values.map((value) => 
-                    <View style={{flexDirection:'row',  alignItems:'center'}}>
+                    <View key={value.id} style={{flexDirection:'row',  alignItems:'center'}}>
                     <View>
                         <FontAwesome
                             name="square-o"
@@ -78,6 +84,7 @@ export default function AboutScreen() {
                     </View>
                 )}
             </View>
+            <Footer/>
         </ScrollView>
     )
 }

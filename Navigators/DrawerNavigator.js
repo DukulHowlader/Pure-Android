@@ -15,6 +15,7 @@ export default function DrawerNavigator() {
             <Drawer.Screen name="HomeDrawer" component={Tabs} />
             <Drawer.Screen name="ProfileStackScreen" component={ProfileStackScreen} />
             <Drawer.Screen name="CartView" component={HomeStackScreen} />
+            <Drawer.Screen name="PastOrder" component={HomeStackScreen} />
         </Drawer.Navigator>
     )
 }

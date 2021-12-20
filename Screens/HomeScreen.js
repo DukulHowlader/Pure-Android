@@ -19,7 +19,7 @@ export default function HomeScreen({ navigation }) {
     const {colors} = useTheme();
 
     useEffect(() => {
-        fetch('http://192.168.100.167:5000/categories')
+        fetch('https://immense-cliffs-46216.herokuapp.com/categories')
             .then(response => response.json())
             .then((data) => {
                 setCategories(data);

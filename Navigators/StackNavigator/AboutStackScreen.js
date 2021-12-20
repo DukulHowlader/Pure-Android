@@ -5,7 +5,6 @@ import AboutScreen from '../../Screens/AboutScreen';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { useTheme } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import PastOrders from '../../Screens/PastOrders';
 
 const AboutStack = createNativeStackNavigator();
 
@@ -35,7 +34,7 @@ export default function AboutStackScreen({ navigation }) {
                 fontWeight: 'bold'
             }
         }}>
-            <AboutStack.Screen name="AboutScreen" component={PastOrders}
+            <AboutStack.Screen name="AboutScreen" component={AboutScreen}
                 options={{
                     title: 'PURE CARE BD',
                     headerLeft: () => (

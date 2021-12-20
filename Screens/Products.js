@@ -7,10 +7,10 @@ const Products = ({ route, navigation }) => {
     const theme = useTheme();
     const { subName } = route.params;
 
-    const [products, setProducts] = useState();
+    const [products, setProducts] = useState([]);
 
     useEffect(() => {
-        fetch(`http://192.168.100.167:5000/category/${subName}`)
+        fetch(`https://immense-cliffs-46216.herokuapp.com/category/${subName}`)
             .then(response => response.json())
             .then(data => setProducts(data))
     }, [subName])
