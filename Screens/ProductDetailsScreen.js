@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { View, Text, StyleSheet, Image, Platform, Dimensions, StatusBar, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, Image, Platform, Dimensions, StatusBar, TouchableOpacity, Alert } from 'react-native';
 import { ImageHeaderScrollView, TriggeringView } from 'react-native-image-header-scroll-view';
 import { TextInput, useTheme } from 'react-native-paper';
 import Feather from 'react-native-vector-icons/Feather';
@@ -35,7 +35,13 @@ const ProductDetailsScreen = ({ route }) => {
         AsyncStorage.setItem("added", JSON.stringify(itemData));
         existingEntries.push(itemData);
         AsyncStorage.setItem("addedProducts", JSON.stringify(existingEntries));
-        alert('Added Successfully')
+        Alert.alert(
+            "Product",
+            "added successfully",
+            [
+                { text: "ok"}
+            ]
+        );
     }
     return (
         <View style={styles.container}>

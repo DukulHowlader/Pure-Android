@@ -106,7 +106,7 @@ export default function EditProfileScreen() {
                     <TextInput
                         placeholder="Full Name"
                         placeholderTextColor="#666666"
-                        defaultValue={loggedInUser?.Custom}
+                        defaultValue={loggedInUser?.CustomerName}
                         style={[styles.textInput,{color:colors.text}]}
                         autoCorrect={false}
                     />
@@ -231,17 +231,10 @@ const styles = StyleSheet.create({
       borderBottomColor: '#f2f2f2',
       paddingBottom: 5,
     },
-    actionError: {
-      flexDirection: 'row',
-      marginTop: 10,
-      borderBottomWidth: 1,
-      borderBottomColor: '#FF0000',
-      paddingBottom: 5,
-    },
+
     textInput: {
       flex: 1,
       marginTop: Platform.OS === 'ios' ? 0 : -5,
       paddingLeft: 10,
-      color: '#05375a',
     },
   });

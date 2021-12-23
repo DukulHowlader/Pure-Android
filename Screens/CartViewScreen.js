@@ -1,13 +1,15 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import React, { useEffect, useState } from 'react'
-import { View, Text, StyleSheet, StatusBar, ScrollView, TouchableOpacity, Image } from 'react-native'
+import React, { useContext, useEffect, useState } from 'react'
+import { View, Text, StyleSheet, StatusBar, ScrollView, TouchableOpacity, Image, Alert } from 'react-native'
 import { Button, TextInput, useTheme } from 'react-native-paper';
 import Feather from 'react-native-vector-icons/Feather';
+import { userContext } from '../App';
 import Footer from '../Components/Footer/Footer';
 
-const CartViewScreen = ({navigation}) => {
+const CartViewScreen = ({ navigation }) => {
     const { colors } = useTheme();
     const theme = useTheme();
+    const [loggedInUser, setLoggedInUser] = useContext(userContext)
     const [addedProducts, setAddedProducts] = useState([]);
     const totalPrice = addedProducts?.reduce((total, product) => total + (parseInt(product.ProductPrice) * (product.ProductQuantity)), 0);
     useEffect(() => {
@@ -42,6 +44,21 @@ const CartViewScreen = ({navigation}) => {
         existingEntries.splice(productIndex, 1);
         await AsyncStorage.setItem("addedProducts", JSON.stringify(existingEntries));
 
+    }
+    const handleCheckout = () => {
+        if (loggedInUser?.loginInfo === 'true') {
+            navigation.navigate('ProceedCheck')
+        }
+        else {
+            Alert.alert(
+                "Please login first",
+                "",
+                [
+                    { text: "Login", onPress: () => navigation.navigate('RootStack')}
+                ]
+            );
+            
+        }
     }
     return (
         <View style={{ flex: 1 }}>
@@ -107,42 +124,41 @@ const CartViewScreen = ({navigation}) => {
                         )
                     })
                 }
-                {addedProducts?.length > 0 && 
-                <>
-                <View style={{ borderTopWidth: 1, flexDirection: 'row', justifyContent: 'space-between', marginTop: 10, borderTopColor: colors.text, width: '95%', alignSelf: 'center' }}>
-                    <Text style={{ color: colors.text, fontSize: 16, fontWeight: 'bold', marginTop: 10 }}>Sub Total:</Text>
-                    <Text style={{ color: colors.text, fontSize: 16, fontWeight: 'bold', marginTop: 10 }}>{totalPrice}/-</Text>
-                </View>
-                <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 10, width: '95%', alignSelf: 'center' }}>
-                    <Text style={{ color: colors.text, fontSize: 16, fontWeight: 'bold', marginTop: 10 }}>Delivery Charge:</Text>
-                    <Text style={{ color: colors.text, fontSize: 16, fontWeight: 'bold', marginTop: 10 }}>60/-</Text>
-                </View>
-                <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 10, width: '95%', alignSelf: 'center' }}>
-                    <Text style={{ color: colors.text, fontSize: 16, fontWeight: 'bold', marginTop: 10 }}>Total:</Text>
-                    <Text style={{ color: colors.text, fontSize: 16, fontWeight: 'bold', marginTop: 10 }}>{totalPrice + 60}/-</Text>
-                </View>
-                <View style={{ flexDirection: 'row', justifyContent: 'flex-end', marginRight: 5, marginTop: 15, marginBottom:50}}>
-                    <TouchableOpacity style={{
-                        paddingVertical: 10,
-                        paddingHorizontal: 16, 
-                        borderRadius: 5, 
-                        backgroundColor: '#71ba58',
-                        flexDirection:'row',
-                        justifyContent:'space-evenly'
-                    }}
-                    onPress={() => navigation.navigate('ProceedCheck')}
-                    >
-                        <Text style={{fontSize:16, color: '#ffffff', fontWeight:'bold' }}>Proceed Checkout</Text>
-                        <Feather
-                            name="arrow-right"
-                            size={22}
-                            color="#ffffff"
-                        />
-                    </TouchableOpacity>
-                </View>
-                </>
+                {addedProducts?.length > 0 &&
+                    <>
+                        <View style={{ borderTopWidth: 1, flexDirection: 'row', justifyContent: 'space-between', marginTop: 10, borderTopColor: colors.text, width: '95%', alignSelf: 'center' }}>
+                            <Text style={{ color: colors.text, fontSize: 16, fontWeight: 'bold', marginTop: 10 }}>Sub Total:</Text>
+                            <Text style={{ color: colors.text, fontSize: 16, fontWeight: 'bold', marginTop: 10 }}>{totalPrice}/-</Text>
+                        </View>
+                        <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 10, width: '95%', alignSelf: 'center' }}>
+                            <Text style={{ color: colors.text, fontSize: 16, fontWeight: 'bold', marginTop: 10 }}>Delivery Charge:</Text>
+                            <Text style={{ color: colors.text, fontSize: 16, fontWeight: 'bold', marginTop: 10 }}>60/-</Text>
+                        </View>
+                        <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 10, width: '95%', alignSelf: 'center' }}>
+                            <Text style={{ color: colors.text, fontSize: 16, fontWeight: 'bold', marginTop: 10 }}>Total:</Text>
+                            <Text style={{ color: colors.text, fontSize: 16, fontWeight: 'bold', marginTop: 10 }}>{totalPrice + 60}/-</Text>
+                        </View>
+                        <View style={{ flexDirection: 'row', justifyContent: 'flex-end', marginRight: 5, marginTop: 80, marginBottom: 50 }}>
+                            <TouchableOpacity style={{
+                                paddingVertical: 10,
+                                paddingHorizontal: 16,
+                                borderRadius: 5,
+                                backgroundColor: '#71ba58',
+                                flexDirection: 'row',
+                                justifyContent: 'space-evenly'
+                            }}
+                                onPress={() => handleCheckout()}
+                            >
+                                <Text style={{ fontSize: 16, color: '#ffffff', fontWeight: 'bold' }}>Proceed Checkout</Text>
+                                <Feather
+                                    name="arrow-right"
+                                    size={22}
+                                    color="#ffffff"
+                                />
+                            </TouchableOpacity>
+                        </View>
+                    </>
                 }
-                <Footer/>
             </ScrollView>
 
 
