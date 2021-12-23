@@ -11,6 +11,7 @@ import CartViewScreen from '../../Screens/CartViewScreen';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import PastOrders from '../../Screens/PastOrders';
 import ProceedCheckout from '../../Screens/ProceedCheckout';
+import OrderSuccess from '../../Components/OrderSuccess/OrderSuccess';
 
 
 const HomeStack = createNativeStackNavigator();
@@ -80,6 +81,9 @@ export default function HomeStackScreen({ navigation }) {
                 options={() => ({
                     title: ''
                 })}
+            />
+            <HomeStack.Screen name="SuccessScreen" component={OrderSuccess}
+               options={{headerShown: false}}
             />
             <HomeStack.Screen name="ProceedCheck" component={ProceedCheckout}
                 options={() => ({
