@@ -3,12 +3,10 @@ import { Text, View, Image } from 'react-native'
 import HomeStackScreen from "../StackNavigator/HomeStackScreen";
 import AboutStackScreen from "../StackNavigator/AboutStackScreen";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import tabStyle from './tabStyle';
 import ContactStackScreen from "../StackNavigator/ContactStackScreen";
 import RootStackScreen from "../StackNavigator/RootStackScreen";
 import { userContext } from "../../App";
 import ProfileStackScreen from "../StackNavigator/ProfileStackScreen";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 
 
 const Tab = createBottomTabNavigator();

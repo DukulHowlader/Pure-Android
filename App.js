@@ -11,11 +11,13 @@ import {
   DarkTheme as PaperDarkTheme
 }
   from "react-native-paper"
-import DrawerNavigator from './Navigators/DrawerNavigator';
+
 import { useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { AuthContext } from './Components/AuthContext/AuthContext';
-
+import { View } from 'react-native';
+import LottieView from 'lottie-react-native';
+import DrawerNavigator from './Navigators/DrawerNavigator/DrawerNavigator';
 
 export const userContext = createContext();
 
@@ -65,12 +67,27 @@ const App = () => {
     }
   }), [])
 
+  const [isLoading, setIsLoading] = useState(true);
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoading(false)
+    }, 3000)
+  },[])
+
+  if(isLoading){
+    return (
+      <View style={{flex:1, justifyContent:"center", alignItems:'center' }}>
+        <LottieView source={require('./icons/67504-100-bio-organic-label-animation.json')} autoPlay loop/>
+      </View>
+    )
+  }
+
   return (
     <PaperProvider theme={theme}>
       <AuthContext.Provider value={authContext}>
         <userContext.Provider value={[loggedInUser, setLoggedInUser]}>
           <NavigationContainer theme={theme}>
-            <DrawerNavigator />
+            <DrawerNavigator/>
           </NavigationContainer>
         </userContext.Provider>
       </AuthContext.Provider>

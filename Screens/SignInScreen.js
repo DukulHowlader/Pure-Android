@@ -8,10 +8,12 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import { userContext } from '../App';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useTheme } from 'react-native-paper';
+import LottieView from 'lottie-react-native';
 
 const SignInScreen = ({ navigation }) => {
 
     const [loggedInUser, setLoggedInUser] = useContext(userContext);
+    const [loginCheckLoader, setLoginCheckLoader] = useState(false);
     const [data, setData] = useState({
         email: '',
         password: '',
@@ -52,6 +54,7 @@ const SignInScreen = ({ navigation }) => {
     }
 
     const loginHandle = async (loginEmail, loginPassword) => {
+        setLoginCheckLoader(true);
 
         try {
             const loginData = {
@@ -70,6 +73,7 @@ const SignInScreen = ({ navigation }) => {
                     if (result.loginInfo === 'true') {
                         setLoggedInUser(result);
                         AsyncStorage.setItem('key', JSON.stringify(result))
+                        setLoginCheckLoader(false);
                     }
                     else {
                         alert("Not Registered!")
@@ -81,8 +85,16 @@ const SignInScreen = ({ navigation }) => {
         }
 
     }
+    if(loginCheckLoader){
+        return (
+            <View style={[StyleSheet.absoluteFill, styles.loaderContainer]}>
+                <LottieView source={require('../Components/Loader/84272-loading-colour.json')} autoPlay loop />
+            </View>
+        );
+    }
 
     return (
+        
         <KeyboardAwareScrollView keyboardShouldPersistTaps={'always'}
             contentContainerStyle={{ flex: 1 }}
             showsVerticalScrollIndicator={false}>
@@ -178,6 +190,7 @@ const SignInScreen = ({ navigation }) => {
                 </Animatable.View>
             </View>
         </KeyboardAwareScrollView>
+        
     );
 };
 
@@ -186,6 +199,13 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#71ba58',
+    },
+    loaderContainer:{
+        justifyContent:'center',
+        alignItems:'center',
+        backgroundColor:'rgba(255,255,255,0.6)',
+        zIndex:5,
+        flex:1
     },
     header: {
         flex: 1,
