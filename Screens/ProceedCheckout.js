@@ -92,9 +92,6 @@ const ProceedCheckout = ({ navigation }) => {
                             AsyncStorage.removeItem('addedProducts');
                             navigation.navigate('SuccessScreen')
                         }
-                        else {
-
-                        }
                     })
             }
             else{
