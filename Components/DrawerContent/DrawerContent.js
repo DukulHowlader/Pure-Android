@@ -20,6 +20,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { AuthContext } from '../AuthContext/AuthContext';
 import { userContext } from '../../App';
+import Octicons from 'react-native-vector-icons/Octicons'
 
 export default function DrawerContent(props) {
     const { toggleTheme } = useContext(AuthContext);
@@ -97,8 +98,8 @@ export default function DrawerContent(props) {
                         />
                         <DrawerItem
                             icon={({ color, size }) => (
-                                <Icon
-                                    name="cart-outline"
+                                <Octicons
+                                    name="list-ordered"
                                     color={color}
                                     size={size}
                                 />
