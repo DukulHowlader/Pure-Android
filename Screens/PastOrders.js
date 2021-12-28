@@ -22,15 +22,15 @@ const PastOrders = ({ navigation }) => {
             {ordersView?.map((order, index) =>
                 <View style={styles.box} key={index}>
                     <View style={{ marginLeft: 15, }}>
-                        <Text style={styles.textSize}><FontAwesome name="user" size={18} /> {order.CustomerName}</Text>
-                        <Text style={styles.textSize}><FontAwesome name="phone" size={18} /> {order.CustomerContact}</Text>
-                        <Text style={styles.textSize}><FontAwesome name="home" size={18} /> {order.CustomerAddress}</Text>
+                        <Text style={[styles.textSize,{color:colors.text}]}><FontAwesome name="user" size={18} /> {order.CustomerName}</Text>
+                        <Text style={[styles.textSize,{color:colors.text}]}><FontAwesome name="phone" size={18} /> {order.CustomerContact}</Text>
+                        <Text style={[styles.textSize,{color:colors.text}]}><FontAwesome name="home" size={18} /> {order.CustomerAddress}</Text>
                     </View>
                     <View style={{ marginLeft: 15, marginTop: 15 }}>
-                        <Text style={[styles.textSize, { alignSelf: 'center' }]}>Ordered Products</Text>
+                        <Text style={[styles.textSize, { alignSelf: 'center',color:colors.text }]}>Ordered Products</Text>
                         <View style={{ flexDirection: 'row', justifyContent:'space-between', marginRight:20, marginBottom:10}}>
-                            <Text style={{fontSize:15}}>Product Name</Text>
-                            <Text style={{fontSize:15}}>QTY</Text>
+                            <Text style={{fontSize:15,color:colors.text}}>Product Name</Text>
+                            <Text style={{fontSize:15, color:colors.text}}>QTY</Text>
                         </View>
                         {order.products?.map((product, index) =>
                             <View key={index} style={{ flexDirection: 'row', justifyContent:'space-between', marginRight:30}}>

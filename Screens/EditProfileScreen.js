@@ -8,12 +8,21 @@ import BottomSheet from 'reanimated-bottom-sheet';
 import Animated from 'react-native-reanimated';
 import { userContext } from '../App';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import LottieView from 'lottie-react-native';
 
-export default function EditProfileScreen() {
+export default function EditProfileScreen({navigation}) {
     const { colors } = useTheme();
     const theme = useTheme();
     const [loggedInUser, setLoggedInUser] = useContext(userContext);
+    const [updatingLoader, setUpdatingLoader] = useState(false);
 
+    if(updatingLoader){
+        return (
+            <View style={[StyleSheet.absoluteFill, styles.loaderContainer]}>
+                <LottieView source={require('../Components/Loader/68202-update.json')} autoPlay loop />
+            </View>
+        );
+    }
     
     const customerName = (value) => {
         setLoggedInUser(
@@ -41,9 +50,11 @@ export default function EditProfileScreen() {
         )
     }
     const handleUpdate = () => {
+        
         const numberChecker =  /(^(\+|01))[1|3-9]{1}(\d){8}$/;
         if (loggedInUser.CustomerContact != null && loggedInUser.CustomerAddress != null) {
             if (numberChecker.test(loggedInUser.CustomerContact)) {
+                setUpdatingLoader(true)
                 fetch(`https://immense-cliffs-46216.herokuapp.com/updateCustomer/${loggedInUser?._id}`, {
 
                     method: 'PATCH',
@@ -55,7 +66,9 @@ export default function EditProfileScreen() {
                     .then(response => response.json())
                     .then(data => {
                         if (data === true) {
-                            AsyncStorage.setItem('key', JSON.stringify(loggedInUser))
+                            AsyncStorage.setItem('key', JSON.stringify(loggedInUser));
+                            setUpdatingLoader(false);
+
                         }
                     })
             }
@@ -252,6 +265,13 @@ const styles = StyleSheet.create({
         padding: 20,
         backgroundColor: '#FFFFFF',
         paddingTop: 20,
+    },
+    loaderContainer:{
+        justifyContent:'center',
+        alignItems:'center',
+        backgroundColor:'rgba(255,255,255,0.6)',
+        zIndex:5,
+        flex:1
     },
     header: {
         backgroundColor: '#FFFFFF',

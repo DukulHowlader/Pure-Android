@@ -7,7 +7,7 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { userContext } from '../App';
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import { NavigationContainer } from '@react-navigation/native';
+import LottieView from 'lottie-react-native';
 
 const ProceedCheckout = ({ navigation }) => {
     const { colors } = useTheme();
@@ -27,36 +27,39 @@ const ProceedCheckout = ({ navigation }) => {
         readAddedProductData()
     }, [addedProducts])
 
-    const [CustomerUpdatedData, setCustomerUpdatedData] = useState({
-        CustomerName: loggedInUser.CustomerName,
-        CustomerEmail: loggedInUser.CustomerEmail,
-        CustomerContact: null,
-        CustomerAddress: null,
-        CustomerPass: loggedInUser.CustomerPass,
-        CustomerImage: null,
-    });
+    const [savingLoader, setSavingLoader] = useState(false);
+
+    if(savingLoader){
+        return (
+            <View style={[StyleSheet.absoluteFill, styles.loaderContainer]}>
+                <LottieView source={require('../Components/Loader/76941-save-icon.json')} autoPlay loop />
+            </View>
+        );
+    }
+
+   
 
     const customerName = (value) => {
-        setCustomerUpdatedData(
+        setLoggedInUser(
             {
-                ...CustomerUpdatedData,
+                ...loggedInUser,
                 CustomerName: value,
             }
         )
     }
     const customerContact = (value) => {
-      
-        setCustomerUpdatedData(
+
+        setLoggedInUser(
             {
-                ...CustomerUpdatedData,
+                ...loggedInUser,
                 CustomerContact: value,
             }
         )
     }
     const customerAddress = (value) => {
-        setCustomerUpdatedData(
+        setLoggedInUser(
             {
-                ...CustomerUpdatedData,
+                ...loggedInUser,
                 CustomerAddress: value,
             }
         )
@@ -64,10 +67,10 @@ const ProceedCheckout = ({ navigation }) => {
 
 
     const orderData = {
-        CustomerName: loggedInUser.CustomerName || CustomerUpdatedData.CustomerName,
+        CustomerName: loggedInUser.CustomerName,
         CustomerEmail: loggedInUser.CustomerEmail,
-        CustomerContact: CustomerUpdatedData.CustomerContact,
-        CustomerAddress: CustomerUpdatedData.CustomerAddress,
+        CustomerContact: loggedInUser.CustomerContact,
+        CustomerAddress: loggedInUser.CustomerAddress,
         CustomerPass: loggedInUser.CustomerPass,
         products: addedProducts,
         deliveryCharge: 60,
@@ -76,9 +79,9 @@ const ProceedCheckout = ({ navigation }) => {
     }
 
     const handlePlaceOrder = () => {
-        const numberChecker =  /(^(\+|01))[1|3-9]{1}(\d){8}$/
-        if (CustomerUpdatedData.CustomerContact != null && CustomerUpdatedData.CustomerAddress != null) {
-            if (numberChecker.test(CustomerUpdatedData.CustomerContact)) {
+        const numberChecker = /(^(\+|01))[1|3-9]{1}(\d){8}$/
+        if (loggedInUser.CustomerContact != null && loggedInUser.CustomerAddress != null) {
+            if (numberChecker.test(loggedInUser.CustomerContact)) {
                 fetch('https://immense-cliffs-46216.herokuapp.com/createOrder', {
                     method: 'POST',
                     headers: {
@@ -94,7 +97,7 @@ const ProceedCheckout = ({ navigation }) => {
                         }
                     })
             }
-            else{
+            else {
                 Alert.alert(
                     "Enter valid contact number",
                     "",
@@ -103,6 +106,50 @@ const ProceedCheckout = ({ navigation }) => {
                     ]
                 );
             }
+        }
+        else {
+            Alert.alert(
+                "Please fill up required fields properly",
+                "",
+                [
+                    { text: "ok" }
+                ]
+            );
+        }
+    }
+    const handleSavingData = () => {
+        const numberChecker = /(^(\+|01))[1|3-9]{1}(\d){8}$/
+        if (loggedInUser.CustomerContact != null && loggedInUser.CustomerAddress != null) {
+            if (numberChecker.test(loggedInUser.CustomerContact)) {
+                setSavingLoader(true)
+                fetch(`https://immense-cliffs-46216.herokuapp.com/updateCustomer/${loggedInUser?._id}`, {
+
+                    method: 'PATCH',
+                    headers: {
+                        'Content-type': 'application/json'
+                    },
+                    body: JSON.stringify(loggedInUser)
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data === true) {
+                            AsyncStorage.setItem('key', JSON.stringify(loggedInUser));
+                            setSavingLoader(false)
+
+                        }
+                    })
+
+            }
+            else {
+                Alert.alert(
+                    "Enter valid contact number",
+                    "",
+                    [
+                        { text: "ok" }
+                    ]
+                );
+            }
+
         }
         else {
             Alert.alert(
@@ -245,7 +292,7 @@ const ProceedCheckout = ({ navigation }) => {
                         </View>
 
                         <View style={{ flexDirection: 'row', justifyContent: 'space-evenly' }}>
-                            <TouchableOpacity style={styles.commandButton} onPress={() => { }}>
+                            <TouchableOpacity style={styles.commandButton} onPress={() => handleSavingData()}>
                                 <Text style={styles.panelButtonTitle}>Save Details</Text>
                             </TouchableOpacity>
                             <TouchableOpacity style={styles.commandButton} onPress={() => handlePlaceOrder()}>
